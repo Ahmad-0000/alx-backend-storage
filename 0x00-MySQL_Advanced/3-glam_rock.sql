@@ -2,7 +2,7 @@
 
 DELIMITER $$
 
-CREATE FUNCTION lspan(split year, formed year)
+CREATE FUNCTION lspan(split INT, formed INT)
 RETURNS INT
 BEGIN
 	DECLARE span year;

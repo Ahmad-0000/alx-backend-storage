@@ -5,7 +5,7 @@ DELIMITER $$
 CREATE FUNCTION lspan(split INT, formed INT)
 RETURNS INT
 BEGIN
-	DECLARE span year;
+	DECLARE span INT;
 	IF split IS NULL THEN
 		SET span = 2022 - formed;
        	ELSE

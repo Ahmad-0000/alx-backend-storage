@@ -2,7 +2,7 @@
 
 DELIMITER $$
 
-CREATE TRIGGER less_qty AFTER INSERT ON orders
+CREATE TRIGGER less_qty BEFORE INSERT ON orders
 FOR EACH ROW 
 	BEGIN
 		IF items.name = NEW.item_name THEN

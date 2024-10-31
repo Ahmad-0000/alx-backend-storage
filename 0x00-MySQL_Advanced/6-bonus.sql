@@ -2,7 +2,7 @@
 
 DELIMITER $$
 
-CREATE PROCEDURE AddBouns(user_id INT, project_name VARCHAR(255), score INT)
+CREATE PROCEDURE AddBonus(user_id INT, project_name VARCHAR(255), score INT)
 BEGIN
 	DECLARE project_id INT DEFAULT 0;
 	IF (SELECT COUNT(*) FROM projects WHERE name = project_name) = 0 THEN

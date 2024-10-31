@@ -2,14 +2,14 @@
 
 DELIMITER $$
 
-CREATE FUNCTION lspan(split, formed)
-RETURNS year
+CREATE FUNCTION lspan(split year, formed year)
+RETURNS INT
 BEGIN
 	DECLARE span year;
 	IF split IS NULL THEN
-		span = 2022 - formed;
+		SET span = 2022 - formed;
        	ELSE
-	       	span = split - formed;
+	       	SET span = split - formed;
 	END IF;
 	RETURN span;
 END$$

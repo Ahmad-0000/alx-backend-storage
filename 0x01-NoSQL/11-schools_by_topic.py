@@ -5,9 +5,6 @@
 
 
 def schools_by_topic(mongo_collection, topic):
-    """Returns a list of school names having a specific topic"""
-    doclist = []
-    for doc in mongo_collection.find():
-        if topic in doc["topics"]:
-            doclist.append(doc)
-    return doclist
+    """Returns a list of school documentss having a specific topic"""
+    scls = mongo_collection.find({"topics": topic})
+    return scls

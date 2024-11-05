@@ -9,7 +9,7 @@ if __name__ == "__main__":
     db = client.logs
     col = db.nginx
 
-    print(f'{col.count_documents({})} logs\nMethods')
+    print(f'{col.count_documents({})} logs\nMethods:')
     print(f'\tmethod GET: {col.count_documents({"method": "GET"})}')
     print(f'\tmethod POST: {col.count_documents({"method": "POST"})}')
     print(f'\tmethod PUT: {col.count_documents({"method": "PUT"})}')

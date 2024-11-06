@@ -27,8 +27,16 @@ class Cache():
             return fn(self._redis.get(key))
         return self._redis.get(key)
 
-    def get_str(self):
-        """To be implemented later"""
+    def get_str(self) -> Optional[int]:
+        """Returns a string"""
+        try:
+            return str(self._redis.get(key))
+        except:
+            return None
 
     def get_int(self):
-        """To be implemented later"""
+        """Returns an int"""
+        try:
+            return int(self._redis.get(key))
+        except:
+            return None

@@ -21,9 +21,11 @@ class Cache():
         self._redis.set(key, data)
         return key
 
-    def get(self, key: str, fn) -> Optional[bytes]:
+    def get(self, key: str, fn = None) -> Optional[bytes]:
         """Getting data from redis server"""
-        return fn(self._redis.get(key))
+        if fn:
+            return fn(self._redis.get(key))
+        return self._redis.get(key)
 
     def get_str(self):
         """To be implemented later"""

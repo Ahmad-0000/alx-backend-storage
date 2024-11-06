@@ -18,6 +18,17 @@ def count_calls(method):
     return wrapper
 
 
+def call_history(method):
+    @wraps(method)
+    def wrapper(self, data):
+        data = str(data)
+        self._redis.rpush(f"{method.__qualname__}:inputs", data)
+        result = method(self, data)
+        self._redis.rpush(f"{method.__qualname__}:outputs", result)
+        return result
+    return wrapper
+
+
 class Cache():
     """To perform caching operations"""
 
@@ -27,6 +38,7 @@ class Cache():
         self._redis.flushdb()
 
     @count_calls
+    @call_history
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """Storing data into redis server"""
         key = str(uuid.uuid4())

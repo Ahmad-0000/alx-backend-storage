@@ -4,7 +4,7 @@ Caching module
 """
 import redis
 import uuid
-from typing import Union
+from typing import Union, Optional
 
 
 class Cache():
@@ -20,3 +20,7 @@ class Cache():
         key = str(uuid.uuid4())
         self._redis.set(key, data)
         return key
+
+    def get(self, key: str, fn) -> Optional[bytes]:
+        """Getting data from redis server"""
+        return fn(self._redis.get(key))

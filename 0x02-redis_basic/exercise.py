@@ -8,7 +8,7 @@ from typing import Union, Optional
 from functools import wraps
 
 
-def counting_calls(method):
+def count_calls(method):
     """Counting how many a method gets used"""
     @wraps(method)
     def wrapper(self, *args, **kwargs):
@@ -26,7 +26,7 @@ class Cache():
         self._redis = redis.Redis()
         self._redis.flushdb()
 
-    @counting_calls
+    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """Storing data into redis server"""
         key = str(uuid.uuid4())

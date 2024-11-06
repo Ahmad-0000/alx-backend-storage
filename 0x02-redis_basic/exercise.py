@@ -24,3 +24,9 @@ class Cache():
     def get(self, key: str, fn) -> Optional[bytes]:
         """Getting data from redis server"""
         return fn(self._redis.get(key))
+
+    def get_str(self):
+        """To be implemented later"""
+
+    def get_int(self):
+        """To be implemented later"""

@@ -21,7 +21,7 @@ class Cache():
         self._redis.set(key, data)
         return key
 
-    def get(self, key: str, fn = None) -> Optional[bytes]:
+    def get(self, key: str, fn=None) -> Optional[bytes]:
         """Getting data from redis server"""
         if fn:
             return fn(self._redis.get(key))
@@ -31,12 +31,12 @@ class Cache():
         """Returns a string"""
         try:
             return str(self._redis.get(key))
-        except:
+        except ValueError:
             return None
 
     def get_int(self):
         """Returns an int"""
         try:
             return int(self._redis.get(key))
-        except:
+        except ValueError:
             return None

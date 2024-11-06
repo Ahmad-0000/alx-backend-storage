@@ -20,8 +20,8 @@ def count_calls(method):
 
 def call_history(method):
     @wraps(method)
-    def wrapper(self, data):
-        data = str(data)
+    def wrapper(self, *args):
+        data = str(args)
         self._redis.rpush(f"{method.__qualname__}:inputs", data)
         result = method(self, data)
         self._redis.rpush(f"{method.__qualname__}:outputs", result)

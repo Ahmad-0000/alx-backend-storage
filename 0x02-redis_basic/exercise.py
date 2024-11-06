@@ -5,6 +5,17 @@ Caching module
 import redis
 import uuid
 from typing import Union, Optional
+from functools import wraps
+
+
+def counting_calls(method):
+    """Counting how many a method gets used"""
+    @wraps(method)
+    def wrapper(self, *args, **kwargs):
+        """A wrapper function"""
+        self._redis.incrby(method.__qualname__, 1)
+        return method(self, *args, **kwargs)
+    return wrapper
 
 
 class Cache():
@@ -15,6 +26,7 @@ class Cache():
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @counting_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """Storing data into redis server"""
         key = str(uuid.uuid4())
